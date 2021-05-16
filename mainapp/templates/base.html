@@ -22,6 +22,11 @@
 </head>
 <style>
 
+    p {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11pt; /* Размер шрифта в пунктах */
+   }
+
     body {
       padding-top: 56px;
     }
@@ -86,23 +91,23 @@
 
       <div class="col-lg-3 mt-5">
         <div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Фиксануть эту залупу
-  </a>
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+              Каталог товаров
+            </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    {% for category in categories %}
-                      <a href="{{ category.get_absolute_url }}" class="list-group-item">{{ category.name }} ({{ category.product_set.count }})</a>
-                {% endfor %}
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
+              {% for category in categories %}
+                  <a href="{{ category.get_absolute_url }}" class="list-group-item">{{ category.name }} ({{ category.product_set.count }})</a>
+               {% endfor %}
+            </div>
         </div>
-       </div>
 
       {% block productfilter %}
       {% endblock productfilter %}
       </div>
       <!-- /.col-lg-3 -->
 
-      <div class="col-lg-6">
+      <div class="col-lg-9">
         {% block content %}
         {% if messages %}
             {% for message in messages %}
@@ -115,20 +120,20 @@
             {% endfor %}
         {% endif %}
 
-        <div class="row mt-6">
+        <div class="row mt-3">
           {% for product in products %}
-          <div class="col-lg-6 col-md-6 mb-4">
-            <div class="card h-100">
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100" style="width: 13rem;">
               <a href="{{ product.get_absolute_url }}"><img class="card-img-top" src="{{ product.image.url }}" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                    <a href="{{ product.get_absolute_url }}"><p>{{ product.title }}</p></a>
                 </h4>
                 <h5>{{ product.price }} руб.</h5>
-                <a href="{% url 'add_to_cart' slug=product.slug %}">
-                  <button class="btn btn-danger">Добавить в корзину</button>
-                </a>
               </div>
+                <a href="{% url 'add_to_cart' slug=product.slug %}">
+                  <button class="btn btn-danger  btn-block">В корзину</button>
+                </a>
             </div>
           </div>
           {% endfor %}
