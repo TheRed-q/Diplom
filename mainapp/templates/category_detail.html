@@ -26,28 +26,43 @@
         <li class="breadcrumb-item"><a href="{{ product.category.get_absolute_url }}">{{ category.name }}</a></li>
       </ol>
     </nav>
-
-
-
-
-    <div class="row mt-3">
-          {% for product in category_products %}
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100" style="width: 13rem;">
-              <a href="{{ product.get_absolute_url }}"><img class="card-img-top" src="{{ product.image.url }}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                    <a href="{{ product.get_absolute_url }}"><p>{{ product.title }}</p></a>
-                </h4>
-                <h5>{{ product.price }} руб.</h5>
+<div class="row mt-3">
+<div class="col-lg-12 col-md-6 mb-4">
+    {% for product in category_products %}
+            <div class="card text-center">
+              <div class="card-header">
+                <p class="card-text">{{ product.title }}</p>
               </div>
-                <a href="{% url 'add_to_cart' slug=product.slug %}">
-                  <button class="btn btn-danger  btn-block">В корзину</button>
-                </a>
-            </div>
-          </div>
-          {% endfor %}
+              <div class="card-body">
+                <a href="{{ product.get_absolute_url }}"><img class="card-img-top" src="{{ product.image.url }}" alt=""></a>
+                <p class="card-text">Артикул товара: {{ product.vendor_code }}</p>
+                <p class="card-text mt-4">Цена: {{ product.price }} руб.</p>
+
+              <div class="card-footer text-muted">
+
+                        <div class="dropdown show ">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Просмотреть характеристики
+                                <a href="{% url 'add_to_cart' slug=product.slug %}">
+                                    <button class="btn btn-primary custom ">   В корзину    </button>
+                                </a>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                {% for f_name, f_value in product.get_features.items %}
+                                    <a class="dropdown-item" href="#">{{ f_name }} : {{ f_value }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+              </div>
+
+
         </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
 
 
 
