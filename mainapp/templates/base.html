@@ -29,6 +29,7 @@
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 11pt; /* Размер шрифта в пунктах */
    }
+
     .custom{
         width: 275px;
     }
@@ -53,7 +54,7 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
     <div class="container">
       <a class="navbar-brand" href="{% url 'base' %}">Интернет-магазин "Энергия"</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,17 +128,18 @@
 
 <div class="row mt-3">
           {% for product in products %}
-          <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card h-100" style="width: 13rem;">
+          <div class="col-lg-3 col-md-6 mb-4 ">
+            <div class="card h-100 border-secondory card text-success bg-white mb-3" style="width: 13rem;">
+                <div class="card-header">Артикул: {{ product.vendor_code }}</div>
               <a href="{{ product.get_absolute_url }}"><img class="card-img-top" src="{{ product.image.url }}" alt=""></a>
-              <div class="card-body">
+              <div class="card-body ">
                 <h4 class="card-title">
-                    <a href="{{ product.get_absolute_url }}"><p>{{ product.title }}</p></a>
+                    <a href="{{ product.get_absolute_url }}"><p style="color:#505652">{{ product.title }}</p></a>
                 </h4>
-                <h5>{{ product.price }} руб.</h5>
+                  <p class="card-text">{{ product.price }} руб.</p>
               </div>
                 <a href="{% url 'add_to_cart' slug=product.slug %}">
-                  <button class="btn btn-primary  btn-block">В корзину</button>
+                  <button class="btn btn-primary   btn-block">В корзину</button>
                 </a>
             </div>
           </div>
