@@ -11,13 +11,21 @@
       </ol>
     </nav>
 <div class="row">
+
+
     <div class="col-md-4">
         <img src="{{ product.image.url }}" class="img-fluid">
     </div>
     <div class="col-md-8">
+
+
         <h3>{{ product.title }}</h3>
         <p style="color: #39b54a">Цена: {{ product.price }} руб.</p>
         <p style="color: #FA3C2F">Артикул: {{ product.vendor_code}}</p>
+        <p style="color: #FA3C2F"><a href="{{ product.pdf_file.url}}">Документация: {{ product.pdf_file}}</a>
+
+
+
         <p>Описание: {{ product.description }}</p>
         <hr>
         <a href="{% url 'add_to_cart' slug=product.slug %}"><button class="btn btn-danger">Добавить в корзину</button></a>
