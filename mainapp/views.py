@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import DetailView, View
-
+from django.http import HttpResponseRedirect
 from .models import Category, Customer, Cart, CartProduct, Product, CategoryGlobal, Order
 
 from .mixins import CartMixin
@@ -52,7 +52,6 @@ class AboutView(CartMixin, View):
 
 
 class ProductDetailView(CartMixin, DetailView):
-
     model = Product
     context_object_name = 'product'
     template_name = 'product_detail.html'

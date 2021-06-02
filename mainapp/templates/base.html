@@ -137,10 +137,17 @@
                     <a href="{{ product.get_absolute_url }}"><p style="color:#505652">{{ product.title }}</p></a>
                 </h4>
                   <p class="card-text">{{ product.price }} руб.</p>
-              </div>
+            </div>
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'add_to_cart' slug=product.slug %}">
                   <button class="btn btn-primary   btn-block">В корзину</button>
                 </a>
+                {% else %}
+                    <a href="{% url 'login' %}">
+                        <button class="btn btn-primary   btn-block">Авторизоваться</button>
+                    </a>
+                {% endif %}
+
             </div>
           </div>
           {% endfor %}
